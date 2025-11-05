@@ -1,0 +1,51 @@
+{
+  "name": "proterra-environnement-website",
+  "version": "1.0.0",
+  "description": "Site web moderne et professionnel pour Proterra Environnement - Expert en étanchéité par géosynthétiques",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server -p 8000 -o",
+    "dev": "npx live-server --port=8000",
+    "build:css": "npx clean-css-cli src/css/main.css -o dist/css/main.min.css",
+    "build:js": "npx terser src/js/main.js -o dist/js/main.min.js -c -m",
+    "build": "npm run build:css && npm run build:js",
+    "validate": "npx html-validate *.html",
+    "lighthouse": "npx lighthouse https://www.proterra-environnement.com --view"
+  },
+  "keywords": [
+    "proterra",
+    "environnement",
+    "étanchéité",
+    "géomembranes",
+    "géosynthétiques",
+    "bassins",
+    "PEHD",
+    "couvertures-flottantes",
+    "website"
+  ],
+  "author": "Proterra Environnement",
+  "license": "UNLICENSED",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/antoinevanloo/test-proterra-environnement.git"
+  },
+  "devDependencies": {
+    "clean-css-cli": "^5.6.2",
+    "terser": "^5.19.2",
+    "html-validate": "^8.0.0",
+    "lighthouse": "^11.0.0",
+    "http-server": "^14.1.1",
+    "live-server": "^1.2.2"
+  },
+  "browserslist": [
+    "> 0.5%",
+    "last 2 versions",
+    "Firefox ESR",
+    "not dead",
+    "not IE 11"
+  ],
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

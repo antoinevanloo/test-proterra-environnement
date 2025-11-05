@@ -1,0 +1,25 @@
+# robots.txt for Proterra Environnement
+# https://www.proterra-environnement.com/robots.txt
+
+User-agent: *
+Allow: /
+
+# Disallow admin and config files
+Disallow: /config/
+Disallow: /*.json$
+
+# Sitemap
+Sitemap: https://www.proterra-environnement.com/sitemap.xml
+
+# Crawl-delay for polite crawlers
+Crawl-delay: 1
+
+# Specific rules for major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
