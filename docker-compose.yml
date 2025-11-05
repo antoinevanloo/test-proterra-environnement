@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7-alpine
+    container_name: proterra-mongodb
+    restart: unless-stopped
+    ports:
+      - '27017:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: proterra_admin
+      MONGO_INITDB_ROOT_PASSWORD: ProterraSecure2024!
+      MONGO_INITDB_DATABASE: proterra
+    volumes:
+      - proterra-data:/data/db
+    networks:
+      - proterra-network
+
+volumes:
+  proterra-data:
+    driver: local
+
+networks:
+  proterra-network:
+    driver: bridge
