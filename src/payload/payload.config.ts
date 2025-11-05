@@ -1,9 +1,8 @@
-import { buildConfig } from 'payload'
-import { postgresAdapter } from '@payloadcms/db-postgres'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { buildConfig } from 'payload/config'
+import { mongooseAdapter } from '@payloadcms/db-mongodb'
+import { webpackBundler } from '@payloadcms/bundler-webpack'
+import { slateEditor } from '@payloadcms/richtext-slate'
 import path from 'path'
-import { fileURLToPath } from 'url'
-import sharp from 'sharp'
 
 // Collections
 import { Projects } from './collections/Projects'
@@ -17,22 +16,20 @@ import { Users } from './collections/Users'
 import { SiteSettings } from './globals/SiteSettings'
 import { Navigation } from './globals/Navigation'
 
-const filename = fileURLToPath(import.meta.url)
-const dirname = path.dirname(filename)
-
 export default buildConfig({
   // Admin panel configuration
   admin: {
     user: 'users',
+    bundler: webpackBundler(),
     meta: {
       titleSuffix: '- Proterra CMS',
       favicon: '/favicon.ico',
       ogImage: '/og-image.jpg',
     },
-    components: {
-      // Custom logo component can be added here
-    },
   },
+
+  // Editor configuration
+  editor: slateEditor({}),
 
   // Collections
   collections: [Projects, Articles, Testimonials, Media, Pages, Users],
@@ -40,45 +37,21 @@ export default buildConfig({
   // Global settings
   globals: [SiteSettings, Navigation],
 
-  // Editor configuration
-  editor: lexicalEditor({}),
-
   // Secret key for encryption
-  secret: process.env.PAYLOAD_SECRET || 'your-secret-key-change-in-production',
+  serverURL: process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000',
 
   // TypeScript configuration
   typescript: {
-    outputFile: path.resolve(dirname, '../payload-types.ts'),
+    outputFile: path.resolve(__dirname, '../payload-types.ts'),
   },
 
-  // Database adapter (PostgreSQL)
-  db: postgresAdapter({
-    pool: {
-      connectionString: process.env.DATABASE_URI || 'postgres://localhost:5432/proterra',
-    },
+  // Database adapter (MongoDB)
+  db: mongooseAdapter({
+    url: process.env.MONGODB_URI || 'mongodb://localhost:27017/proterra',
   }),
-
-  // Sharp for image processing
-  sharp,
-
-  // Plugins can be added here
-  plugins: [],
-
-  // CORS configuration
-  cors: [process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'].filter(Boolean),
-
-  // CSRF protection
-  csrf: [process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'].filter(Boolean),
 
   // GraphQL configuration
   graphQL: {
-    schemaOutputFile: path.resolve(dirname, '../generated-schema.graphql'),
-  },
-
-  // Upload configuration
-  upload: {
-    limits: {
-      fileSize: 10000000, // 10MB
-    },
+    schemaOutputFile: path.resolve(__dirname, '../generated-schema.graphql'),
   },
 })
