@@ -5,8 +5,10 @@
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_OPTIONS='--no-deprecation' next dev",
+    "dev:payload": "cross-env NODE_OPTIONS='--no-deprecation' ts-node server.ts",
     "build": "cross-env NODE_OPTIONS='--no-deprecation' payload migrate && next build",
     "start": "cross-env NODE_OPTIONS='--no-deprecation' next start",
+    "start:payload": "cross-env NODE_OPTIONS='--no-deprecation' ts-node server.ts",
     "lint": "next lint",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css,md}\"",
     "type-check": "tsc --noEmit",
@@ -62,6 +64,7 @@
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.8",
     "tailwindcss": "^3.4.14",
+    "ts-node": "^10.9.2",
     "typescript": "^5.6.3"
   },
   "engines": {

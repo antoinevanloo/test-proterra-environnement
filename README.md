@@ -1,384 +1,266 @@
-# 🌱 Proterra Environnement - Site Web Next.js + Payload CMS
+# Proterra Environnement - Site Web Moderne
 
-Site web professionnel moderne avec panel d'administration CMS pour Proterra Environnement, expert en étanchéité par géosynthétiques.
+Site web professionnel pour Proterra Environnement, expert en étanchéité par géosynthétiques.
 
-![Version](https://img.shields.io/badge/version-2.0.0-blue)
-![Next.js](https://img.shields.io/badge/Next.js-15-black)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.6-blue)
-![Payload CMS](https://img.shields.io/badge/Payload%20CMS-3.0-green)
+## Stack Technique
 
----
+- **Next.js 14.2.16** - Framework React avec App Router
+- **Payload CMS 2.30.3** - CMS headless pour la gestion de contenu
+- **TypeScript 5.6** - Type safety
+- **Tailwind CSS 3.4** - Design system Proterra
+- **MongoDB** - Base de données
+- **React 18.3.1** - Bibliothèque UI
+- **Radix UI** - Composants accessibles
+- **Leaflet** - Cartes interactives
 
-## 🎯 Caractéristiques principales
+## Fonctionnalités
 
-- ✅ **Next.js 15** avec App Router pour performance optimale
-- ✅ **Payload CMS 3.0** pour gestion de contenu sans développeur
-- ✅ **TypeScript** strict pour robustesse du code
-- ✅ **Charte graphique Proterra** (Bleu marine #0F2B46, Vert lime #A4D233, Bleu ciel #00A3E0)
-- ✅ **Page Builder** avec blocs flexibles
-- ✅ **SEO avancé** (Schema.org, métadonnées, sitemap)
-- ✅ **Référencement IA** optimisé
-- ✅ **100% Responsive** mobile-first
-- ✅ **Accessibilité WCAG 2.1**
-- ✅ **Tailwind CSS** + shadcn/ui
-- ✅ **Framer Motion** pour animations
-- ✅ **PostgreSQL** pour la base de données
+### Pages Publiques
+- ✅ Page d'accueil avec Hero, Stats, Services, CTA
+- ✅ Page Bassins avec tabs (Industriels, Agricoles, Rétention, Stockage)
+- ✅ Page Déchets & Terres polluées avec solutions détaillées
+- ✅ Page Couvertures flottantes avec vidéos
+- ✅ Page Actualités avec filtres et recherche
+- ✅ Page Contact avec formulaire et cartes interactives
+- ✅ Page Réalisations avec projets en grille
 
----
+### Page Builder (12 blocs flexibles)
+1. **Hero** - Titre, sous-titre, background (gradient/image), CTAs
+2. **Rich Text** - Contenu enrichi avec 4 largeurs
+3. **Image** - Image unique avec légende, 4 tailles
+4. **Gallery** - Galerie d'images, 2-4 colonnes
+5. **Video** - YouTube, Vimeo ou fichier uploadé
+6. **CTA** - Call-to-action avec boutons et backgrounds
+7. **Features Grid** - Grille de services avec icônes, 2-4 colonnes
+8. **Stats** - Statistiques en grille (2-6 items)
+9. **Testimonials** - Témoignages clients avec ratings
+10. **Contact Form** - Formulaire de contact complet
+11. **Map** - Cartes interactives des bureaux
+12. **FAQ** - Accordéon questions/réponses
 
-## 📂 Architecture du projet
+### Design System Proterra
+- **Couleurs** : Navy (#0F2B46), Lime (#A4D233), Blue (#00A3E0)
+- **Typographie** : Inter + Poppins
+- **Responsive** : Mobile-first
+- **Accessibilité** : WCAG 2.1 AA
+- **SEO** : Métadonnées complètes, Schema.org
 
-```
-proterra-environnement/
-├── src/
-│   ├── app/                    # Next.js App Router
-│   │   ├── layout.tsx         # Layout racine avec SEO
-│   │   ├── page.tsx           # Page d'accueil
-│   │   └── (routes)/          # Pages du site
-│   │
-│   ├── components/             # Composants React
-│   │   ├── ui/                # Composants UI de base (shadcn/ui)
-│   │   ├── layout/            # Header, Footer, Navigation
-│   │   ├── blocks/            # Blocs Page Builder
-│   │   └── features/          # Composants métier
-│   │
-│   ├── payload/                # Configuration Payload CMS
-│   │   ├── collections/       # Collections (Projects, Articles, etc.)
-│   │   ├── globals/           # Paramètres globaux
-│   │   ├── blocks/            # Blocs Page Builder
-│   │   └── payload.config.ts  # Config principale
-│   │
-│   ├── lib/                    # Utilitaires et helpers
-│   │   └── utils.ts           # Fonctions utilitaires
-│   │
-│   └── styles/                 # Styles CSS
-│       └── globals.css        # Styles globaux + Design System
-│
-├── public/                     # Fichiers statiques
-│   └── media/                 # Uploads Payload CMS
-│
-├── next.config.js             # Configuration Next.js
-├── tailwind.config.ts         # Configuration Tailwind
-├── tsconfig.json              # Configuration TypeScript
-├── .eslintrc.json             # Configuration ESLint
-├── .prettierrc                # Configuration Prettier
-├── .env.example               # Variables d'environnement (exemple)
-└── package.json               # Dépendances
-```
-
----
-
-## 🚀 Installation et démarrage
+## Installation
 
 ### Prérequis
+- Node.js >= 18.17.0
+- MongoDB (local ou cloud)
+- npm ou yarn
 
-- **Node.js** >= 18.17.0
-- **PostgreSQL** >= 14
-- **npm** ou **yarn** ou **pnpm**
-
-### 1. Cloner le repository
-
+### 1. Cloner et installer
 ```bash
-git clone https://github.com/antoinevanloo/test-proterra-environnement.git
+git clone <repository-url>
 cd test-proterra-environnement
-```
-
-### 2. Installer les dépendances
-
-```bash
 npm install
-# ou
-yarn install
-# ou
-pnpm install
 ```
 
-### 3. Configurer les variables d'environnement
-
+### 2. Configuration
 Créer un fichier `.env` à la racine :
-
-```bash
-cp .env.example .env
-```
-
-Éditer `.env` :
-
 ```env
-# Database PostgreSQL
-DATABASE_URI=postgres://user:password@localhost:5432/proterra
+# MongoDB
+MONGODB_URI=mongodb://localhost:27017/proterra
 
 # Payload CMS
-PAYLOAD_SECRET=votre-clé-secrète-super-sécurisée-32-caractères-minimum
+PAYLOAD_SECRET=votre-clé-secrète-minimum-32-caractères
+PAYLOAD_PORT=3001
 
 # Next.js
 NEXT_PUBLIC_SERVER_URL=http://localhost:3000
-
-# Email (Resend recommandé)
-RESEND_API_KEY=re_xxxxxxxxxxxxx
-EMAIL_FROM=noreply@proterra-environnement.com
 ```
 
-### 4. Créer la base de données PostgreSQL
-
+### 3. Démarrer MongoDB
 ```bash
-# Avec psql
-createdb proterra
+# Si MongoDB local
+mongod
 
-# Ou avec Docker
-docker run --name proterra-postgres \
-  -e POSTGRES_DB=proterra \
-  -e POSTGRES_USER=proterra \
-  -e POSTGRES_PASSWORD=proterra \
-  -p 5432:5432 \
-  -d postgres:16-alpine
+# Ou utiliser MongoDB Atlas (cloud)
 ```
 
-### 5. Démarrer le serveur de développement
+### 4. Démarrer les serveurs
 
+⚠️ **IMPORTANT** : Vous devez lancer **2 serveurs séparément** dans 2 terminaux :
+
+**Terminal 1 : Next.js (site web)**
 ```bash
 npm run dev
 ```
+Site accessible sur **http://localhost:3000**
 
-Le site sera accessible sur :
-- **Frontend** : http://localhost:3000
-- **Admin CMS** : http://localhost:3000/admin
-
-### 6. Créer le premier utilisateur admin
-
-Lors du premier accès à `/admin`, Payload vous demandera de créer un compte administrateur.
-
----
-
-## 🎨 Charte graphique Proterra
-
-Le design system intègre la charte graphique officielle :
-
-### Couleurs principales
-
-```css
-/* Bleu marine foncé (sections sombres, header, footer) */
---proterra-navy: #0F2B46
-
-/* Vert lime (CTA, accents, sections vibrantes) */
---proterra-lime: #A4D233
-
-/* Bleu ciel (sections bassins, liens hover) */
---proterra-blue: #00A3E0
-
-/* Couleurs secondaires */
---color-white: #FFFFFF
---color-gray: #F5F5F5
---color-text: #333333
+**Terminal 2 : Payload CMS (admin)**
+```bash
+npm run dev:payload
 ```
+Admin accessible sur **http://localhost:3001/admin**
 
-### Typographie
+### 5. Créer le premier utilisateur admin
+- Aller sur **http://localhost:3001/admin**
+- Créer votre compte administrateur
 
-```css
-/* Titres */
-font-family: 'Poppins', sans-serif;
-font-weight: 700-900;
+## URLs importantes
 
-/* Corps de texte */
-font-family: 'Inter', sans-serif;
-font-weight: 400-600;
-```
+- **Site web** : http://localhost:3000
+- **Admin Payload CMS** : http://localhost:3001/admin
+- **Réalisations** : http://localhost:3000/realisations
+- **Contact** : http://localhost:3000/contact
+- **Actualités** : http://localhost:3000/actus
 
-### Utilisation dans Tailwind
+## Utilisation du CMS
 
-```tsx
-// Couleurs
-<div className="bg-proterra-navy-500 text-white">
-<button className="bg-proterra-lime-500 hover:bg-proterra-lime-600">
-<a className="text-proterra-blue-500">
+### Accéder à l'admin Payload CMS
+URL : **http://localhost:3001/admin**
 
-// Fonts
-<h1 className="font-heading font-bold">
-<p className="font-sans">
-```
+### Collections disponibles
 
----
+#### Pages
+Créer des pages avec le Page Builder :
+- Glisser-déposer 12 types de blocs
+- Configuration visuelle sans code
+- SEO intégré (title, description, keywords)
 
-## 📦 Collections Payload CMS
+#### Projects (Réalisations)
+Gérer vos projets :
+- Titre, slug, catégorie
+- Localisation, année, surface
+- Galerie d'images
+- Description détaillée
 
-### Projects (Réalisations)
-
-Gestion des projets et réalisations.
-
-**Champs :**
-- Titre, slug, catégorie (Bassins/Déchets/Couvertures)
-- Localisation, année, client
-- Description complète
-- Détails techniques (surface, durée, matériau)
-- Galerie photos
-- Tags et projets similaires
-
-**Accès CMS :** `Admin → Contenu → Projects`
-
-### Articles (Actualités)
-
-Gestion des articles de blog et actualités.
-
-**Champs :**
-- Titre, slug, résumé
-- Contenu riche
-- Image de couverture
-- Auteur, catégorie, tags
+#### Articles (Actualités)
+Publier des actualités :
+- Titre, slug, catégorie
 - Date de publication
+- Contenu enrichi
+- Image à la une
 
-**Accès CMS :** `Admin → Contenu → Articles`
-
-### Testimonials (Témoignages)
-
-Gestion des témoignages clients.
-
-**Champs :**
-- Nom, poste, entreprise
+#### Testimonials (Témoignages)
+Ajouter des témoignages clients :
+- Nom, rôle, entreprise
 - Citation
-- Photo (optionnel)
-- Note (1-5 étoiles)
+- Rating (1-5 étoiles)
 - Ordre d'affichage
 
-**Accès CMS :** `Admin → Contenu → Testimonials`
+#### Media
+Bibliothèque médias centralisée :
+- Upload d'images et vidéos
+- Génération automatique de tailles multiples
+- Alt text pour SEO
 
-### Media (Médias)
+### Globals
 
-Gestion centralisée des images et fichiers.
+#### Site Settings
+Paramètres globaux du site :
+- Nom du site
+- Description
+- Logo
+- Réseaux sociaux
 
-**Fonctionnalités :**
-- Upload drag & drop
-- Génération automatique de plusieurs tailles
-- Conversion WebP automatique
-- Texte alternatif pour SEO
+#### Navigation
+Gérer les menus de navigation :
+- Menu principal
+- Menu footer
+- Liens personnalisés
 
-**Accès CMS :** `Admin → Média → Media`
-
-### Pages (Pages avec Page Builder)
-
-*(En cours de développement - Page Builder à venir)*
-
-**Fonctionnalités prévues :**
-- Construction de pages par blocs
-- 10+ types de blocs (Hero, Services, Galerie, etc.)
-- Drag & drop pour réorganiser
-- Preview en temps réel
-
----
-
-## 🛠️ Développement
-
-### Commandes disponibles
+## Scripts disponibles
 
 ```bash
 # Développement
-npm run dev
+npm run dev              # Démarre Next.js (port 3000)
+npm run dev:payload      # Démarre Payload Admin (port 3001)
 
-# Build production
-npm run build
+# Production
+npm run build            # Build Next.js
+npm run start            # Démarre Next.js en production
+npm run start:payload    # Démarre Payload Admin en production
 
-# Démarrer en production
-npm run start
-
-# Linter (ESLint)
-npm run lint
-
-# Formatter (Prettier)
-npm run format
-
-# Vérification TypeScript
-npm run type-check
-
-# Générer les types Payload
-npm run generate:types
+# Qualité code
+npm run lint             # ESLint
+npm run format           # Prettier
+npm run type-check       # TypeScript check
 ```
 
-### Bonnes pratiques
+## Structure du projet
 
-1. **TypeScript strict** : Toujours typer vos composants
-2. **ESLint + Prettier** : Formater le code avant commit
-3. **Commits conventionnels** : `feat:`, `fix:`, `docs:`, etc.
-4. **Tests** : Tester les composants critiques
-5. **Accessibilité** : ARIA labels, navigation clavier
+```
+test-proterra-environnement/
+├── src/
+│   ├── app/                    # Pages Next.js (App Router)
+│   │   ├── layout.tsx          # Layout racine
+│   │   ├── page.tsx            # Page d'accueil
+│   │   ├── bassins/            # Page Bassins
+│   │   ├── dechets-terres-polluees/
+│   │   ├── couvertures-flottantes/
+│   │   ├── actus/              # Page Actualités
+│   │   ├── contact/            # Page Contact
+│   │   └── realisations/       # Page Réalisations
+│   ├── components/
+│   │   ├── blocks/             # 12 blocs Page Builder
+│   │   ├── layout/             # Header, Footer
+│   │   └── ui/                 # Composants UI réutilisables
+│   ├── lib/
+│   │   └── utils.ts            # Fonctions utilitaires
+│   ├── payload/
+│   │   ├── collections/        # Collections Payload CMS
+│   │   ├── globals/            # Globals Payload CMS
+│   │   └── payload.config.ts   # Config Payload
+│   └── styles/
+│       └── globals.css         # Styles globaux Tailwind
+├── public/                     # Assets statiques
+├── server.ts                   # Serveur Express pour Payload Admin
+├── tailwind.config.ts          # Configuration Tailwind
+├── tsconfig.json               # Configuration TypeScript
+└── package.json
+```
 
----
+## Dépannage
 
-## 📄 SEO et référencement
+### Erreur 404 sur /admin
+L'admin Payload CMS tourne sur un serveur séparé. Utilisez :
+- **http://localhost:3001/admin** (et non localhost:3000/admin)
+- Lancez `npm run dev:payload` dans un terminal séparé
 
-### Métadonnées
-
-Chaque page génère automatiquement :
-- Title et description optimisés
-- Open Graph (Facebook, LinkedIn)
-- Twitter Cards
-- Canonical URLs
-- Robots directives
-
-### Schema.org
-
-Données structurées JSON-LD incluses :
-- Organization (entreprise)
-- LocalBusiness (agences)
-- Service (offres)
-- Article (actualités)
-- Project (réalisations)
-
-### Sitemap XML
-
-Généré automatiquement à `/sitemap.xml`
-
-### Robots.txt
-
-Configuré automatiquement à `/robots.txt`
-
----
-
-## 🌐 Déploiement
-
-### Vercel (Recommandé)
-
-1. Connecter le repository GitHub
-2. Configurer les variables d'environnement
-3. Déployer automatiquement
-
+### Erreur MongoDB
 ```bash
-# Installer Vercel CLI
-npm i -g vercel
+# Vérifier que MongoDB tourne
+mongod
 
-# Déployer
-vercel
+# Ou installer MongoDB:
+# macOS: brew install mongodb-community
+# Ubuntu: sudo apt install mongodb
+# Windows: https://www.mongodb.com/try/download/community
 ```
 
-### Variables d'environnement de production
-
-```env
-DATABASE_URI=postgres://...
-PAYLOAD_SECRET=...
-NEXT_PUBLIC_SERVER_URL=https://www.proterra-environnement.com
-RESEND_API_KEY=re_...
+### Port déjà utilisé
+```bash
+# Si port 3000 ou 3001 déjà pris
+lsof -ti:3000 | xargs kill -9
+lsof -ti:3001 | xargs kill -9
 ```
 
----
+## Déploiement
 
-## 📚 Documentation additionnelle
+### Vercel (recommandé pour Next.js)
+1. Push le code sur GitHub
+2. Importer sur Vercel
+3. Configurer les variables d'environnement
+4. Déployer
 
-- [Next.js Documentation](https://nextjs.org/docs)
-- [Payload CMS Documentation](https://payloadcms.com/docs)
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
-- [shadcn/ui Components](https://ui.shadcn.com/)
+### Serveur Payload Admin séparé
+Le serveur Payload Admin (Express) doit être déployé séparément :
+- Utiliser Render, Railway, DigitalOcean, etc.
+- Configurer MongoDB Atlas (cloud)
+- Définir MONGODB_URI et PAYLOAD_SECRET
 
----
+## Support
 
-## 🤝 Support
+Pour toute question ou problème :
+- Documentation Payload CMS : https://payloadcms.com/docs
+- Documentation Next.js : https://nextjs.org/docs
+- GitHub Issues : <repository-url>/issues
 
-Pour toute question :
-- **Email** : proterra@proterra-environnement.com
-- **Téléphone** : 02 47 42 82 82
+## Licence
 
----
-
-## 📝 Licence
-
-© 2024 Proterra Environnement. Tous droits réservés.
-
----
-
-**Développé avec ❤️ par Claude Code pour Proterra Environnement**
+Propriétaire - Proterra Environnement © 2024
