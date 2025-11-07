@@ -482,7 +482,7 @@ export const Pages: CollectionConfig = {
         },
         // Testimonials Block
         {
-          slug: 'testimonials',
+          slug: 'testimonials-block',
           labels: {
             singular: 'Témoignages',
             plural: 'Témoignages',
