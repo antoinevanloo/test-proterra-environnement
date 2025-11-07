@@ -77,8 +77,9 @@ MONGO_USERNAME=proterra_admin
 MONGO_PASSWORD=ProterraSecure2024!
 MONGO_DATABASE=proterra
 
-# MongoDB - URI de connexion
-MONGODB_URI=mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@localhost:27017/${MONGO_DATABASE}?authSource=admin
+# MongoDB - URI de connexion (utilisé par Payload CMS)
+# ⚠️ Écrivez la valeur complète - dotenv ne supporte pas ${...}
+MONGODB_URI=mongodb://proterra_admin:ProterraSecure2024!@localhost:27017/proterra?authSource=admin
 
 # Payload CMS - CHANGEZ CETTE CLÉ !
 PAYLOAD_SECRET=votre-clé-générée-ici

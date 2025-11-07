@@ -120,9 +120,17 @@ MONGO_DATABASE=proterra
 - Docker Compose lit les variables depuis `.env` automatiquement
 - Vous pouvez changer ces valeurs dans `.env` avant de démarrer Docker
 
-**URI complète** :
+**⚠️ IMPORTANT - Configuration de MONGODB_URI** :
+
+Dans votre fichier `.env`, vous DEVEZ écrire la valeur **complète** de `MONGODB_URI` :
+```env
+MONGODB_URI=mongodb://proterra_admin:ProterraSecure2024!@localhost:27017/proterra?authSource=admin
 ```
-mongodb://proterra_admin:ProterraSecure2024!@localhost:27017/proterra?authSource=admin
+
+**NE PAS utiliser** l'interpolation de variables `${...}` car `dotenv` ne la supporte pas :
+```env
+# ❌ CECI NE FONCTIONNE PAS :
+MONGODB_URI=mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@localhost:27017/${MONGO_DATABASE}?authSource=admin
 ```
 
 **Connexion par défaut** :
