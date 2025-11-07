@@ -2,14 +2,11 @@ import express from 'express'
 import payload from 'payload'
 import dotenv from 'dotenv'
 
+// Load environment variables
 dotenv.config()
 
 const app = express()
-const PORT = process.env.PAYLOAD_PORT || 3001
-
-// Set serverURL for Payload Admin before init
-// This overrides NEXT_PUBLIC_SERVER_URL from .env for the Payload Admin context
-process.env.NEXT_PUBLIC_SERVER_URL = `http://localhost:${PORT}`
+const PORT = parseInt(process.env.PAYLOAD_PORT || '3001', 10)
 
 const start = async () => {
   await payload.init({

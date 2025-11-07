@@ -37,8 +37,9 @@ export default buildConfig({
   // Global settings
   globals: [SiteSettings, Navigation],
 
-  // Secret key for encryption
-  serverURL: process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000',
+  // Server URL - URL où Payload CMS est accessible
+  // Utilisée par l'admin panel pour faire ses appels API
+  serverURL: process.env.PAYLOAD_SERVER_URL || 'http://localhost:3001',
 
   // TypeScript configuration
   typescript: {
