@@ -7,6 +7,10 @@ dotenv.config()
 const app = express()
 const PORT = process.env.PAYLOAD_PORT || 3001
 
+// Set serverURL for Payload Admin before init
+// This overrides NEXT_PUBLIC_SERVER_URL from .env for the Payload Admin context
+process.env.NEXT_PUBLIC_SERVER_URL = `http://localhost:${PORT}`
+
 const start = async () => {
   await payload.init({
     secret: process.env.PAYLOAD_SECRET || 'YOUR-SECRET-KEY',
