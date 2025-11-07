@@ -1,4 +1,4 @@
-import type { GlobalConfig } from 'payload'
+import { GlobalConfig } from 'payload/types'
 
 export const SiteSettings: GlobalConfig = {
   slug: 'site-settings',
