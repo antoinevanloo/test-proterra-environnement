@@ -1,15 +1,15 @@
-import type { CollectionConfig } from 'payload'
+import { CollectionConfig } from 'payload/types'
 
 export const Projects: CollectionConfig = {
   slug: 'projects',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'category', 'location', 'year', 'featured'],
     group: 'Contenu',
     description: 'Gestion des réalisations et projets',
+    defaultColumns: ['title', 'category', 'location', 'year', 'status'],
   },
   access: {
-    read: () => true, // Public
+    read: () => true,
   },
   fields: [
     {
@@ -17,9 +17,6 @@ export const Projects: CollectionConfig = {
       type: 'text',
       required: true,
       label: 'Titre du projet',
-      admin: {
-        description: 'Ex: Bassin industriel - Plateforme logistique',
-      },
     },
     {
       name: 'slug',
@@ -28,19 +25,15 @@ export const Projects: CollectionConfig = {
       unique: true,
       label: 'URL (slug)',
       admin: {
-        description: 'Généré automatiquement à partir du titre',
         position: 'sidebar',
       },
       hooks: {
         beforeValidate: [
-          ({ value, data }) => {
+          ({ value, data }: { value?: string; data?: any }) => {
             if (!value && data?.title) {
               return data.title
                 .toLowerCase()
-                .normalize('NFD')
-                .replace(/[\u0300-\u036f]/g, '')
-                .replace(/[^\w\s-]/g, '')
-                .replace(/[\s_-]+/g, '-')
+                .replace(/[^a-z0-9]+/g, '-')
                 .replace(/^-+|-+$/g, '')
             }
             return value
@@ -54,43 +47,16 @@ export const Projects: CollectionConfig = {
       required: true,
       label: 'Catégorie',
       options: [
-        {
-          label: 'Bassins',
-          value: 'bassins',
-        },
-        {
-          label: 'Déchets & Terres polluées',
-          value: 'dechets-terres-polluees',
-        },
-        {
-          label: 'Couvertures flottantes',
-          value: 'couvertures-flottantes',
-        },
+        { label: 'Bassins industriels', value: 'bassins-industriels' },
+        { label: 'Bassins agricoles', value: 'bassins-agricoles' },
+        { label: 'Bassins de rétention', value: 'bassins-retention' },
+        { label: 'Bassins de stockage', value: 'bassins-stockage' },
+        { label: 'Déchets & Terres polluées', value: 'dechets-terres-polluees' },
+        { label: 'Couvertures flottantes', value: 'couvertures-flottantes' },
       ],
       admin: {
         position: 'sidebar',
       },
-    },
-    {
-      name: 'featured',
-      type: 'checkbox',
-      label: 'Projet vedette',
-      defaultValue: false,
-      admin: {
-        position: 'sidebar',
-        description: 'Afficher en page d\'accueil',
-      },
-    },
-    {
-      name: 'year',
-      type: 'number',
-      required: true,
-      label: 'Année',
-      admin: {
-        position: 'sidebar',
-        description: 'Année de réalisation',
-      },
-      defaultValue: () => new Date().getFullYear(),
     },
     {
       name: 'location',
@@ -98,92 +64,67 @@ export const Projects: CollectionConfig = {
       required: true,
       label: 'Localisation',
       admin: {
-        description: 'Ex: Allex (77) - 4 072 m² ou Provence-Alpes-Côte d\'Azur',
+        description: 'Ville et département (ex: Tours, 37)',
       },
     },
     {
-      name: 'excerpt',
-      type: 'textarea',
-      label: 'Résumé court',
+      name: 'year',
+      type: 'text',
+      required: true,
+      label: 'Année',
       admin: {
-        description: 'Description courte pour les cartes (150 caractères max)',
+        description: 'Année de réalisation',
       },
-      maxLength: 150,
+    },
+    {
+      name: 'client',
+      type: 'text',
+      label: 'Client',
+      admin: {
+        description: 'Nom du client (optionnel)',
+      },
     },
     {
       name: 'description',
       type: 'richText',
       required: true,
       label: 'Description complète',
-      admin: {
-        description: 'Description détaillée du projet',
-      },
     },
     {
       name: 'details',
       type: 'group',
-      label: 'Détails du projet',
+      label: 'Détails techniques',
       fields: [
-        {
-          name: 'client',
-          type: 'text',
-          label: 'Client',
-          admin: {
-            description: 'Nom du client (peut être masqué si confidentiel)',
-          },
-        },
         {
           name: 'surface',
           type: 'text',
-          label: 'Surface',
-          admin: {
-            description: 'Ex: 4 072 m² ou 5000 m²',
-          },
-        },
-        {
-          name: 'volume',
-          type: 'text',
-          label: 'Volume',
-          admin: {
-            description: 'Ex: 3000 m³ (optionnel)',
-          },
+          label: 'Surface (m²)',
         },
         {
           name: 'duration',
           type: 'text',
-          label: 'Durée des travaux',
-          admin: {
-            description: 'Ex: 3 semaines',
-          },
+          label: 'Durée du chantier',
         },
         {
           name: 'material',
           type: 'text',
-          label: 'Matériau',
-          admin: {
-            description: 'Ex: PEHD 2mm, Géomembrane PEHD 1.5mm',
-          },
-        },
-        {
-          name: 'technique',
-          type: 'textarea',
-          label: 'Technique utilisée',
-          admin: {
-            description: 'Description des techniques mises en œuvre',
-          },
+          label: 'Matériau principal',
         },
       ],
     },
     {
-      name: 'images',
+      name: 'featuredImage',
+      type: 'upload',
+      relationTo: 'media',
+      required: true,
+      label: 'Image principale',
+    },
+    {
+      name: 'gallery',
       type: 'array',
       label: 'Galerie photos',
-      minRows: 1,
-      maxRows: 15,
-      labels: {
-        singular: 'Image',
-        plural: 'Images',
-      },
+      minRows: 0,
+      maxRows: 20,
       fields: [
         {
           name: 'image',
@@ -200,27 +141,10 @@ export const Projects: CollectionConfig = {
       ],
     },
     {
-      name: 'featuredImage',
-      type: 'upload',
-      relationTo: 'media',
-      required: true,
-      label: 'Image principale',
-      admin: {
-        description: 'Image de couverture du projet',
-      },
-    },
-    {
       name: 'tags',
       type: 'array',
-      label: 'Mots-clés',
+      label: 'Tags',
       maxRows: 10,
-      labels: {
-        singular: 'Mot-clé',
-        plural: 'Mots-clés',
-      },
-      admin: {
-        description: 'Tags pour filtrer les projets',
-      },
       fields: [
         {
           name: 'tag',
@@ -235,60 +159,42 @@ export const Projects: CollectionConfig = {
       relationTo: 'projects',
       hasMany: true,
       label: 'Projets similaires',
-      admin: {
-        description: 'Sélectionner 3-4 projets similaires',
-      },
-      maxDepth: 1,
-    },
-    {
-      name: 'publishedAt',
-      type: 'date',
-      label: 'Date de publication',
-      admin: {
-        position: 'sidebar',
-        date: {
-          pickerAppearance: 'dayAndTime',
-        },
-      },
-      defaultValue: () => new Date().toISOString(),
     },
     {
       name: 'status',
       type: 'select',
-      label: 'Statut',
       required: true,
       defaultValue: 'draft',
+      label: 'Statut',
       options: [
-        {
-          label: 'Brouillon',
-          value: 'draft',
-        },
-        {
-          label: 'Publié',
-          value: 'published',
-        },
+        { label: 'Brouillon', value: 'draft' },
+        { label: 'Publié', value: 'published' },
       ],
       admin: {
         position: 'sidebar',
       },
     },
-  ],
-  hooks: {
-    beforeChange: [
-      ({ data }) => {
-        // Auto-generate slug if not provided
-        if (data.title && !data.slug) {
-          data.slug = data.title
-            .toLowerCase()
-            .normalize('NFD')
-            .replace(/[\u0300-\u036f]/g, '')
-            .replace(/[^\w\s-]/g, '')
-            .replace(/[\s_-]+/g, '-')
-            .replace(/^-+|-+$/g, '')
-        }
-        return data
+    {
+      name: 'publishedDate',
+      type: 'date',
+      label: 'Date de publication',
+      admin: {
+        position: 'sidebar',
+        date: {
+          pickerAppearance: 'dayOnly',
+        },
       },
-    ],
-  },
+      hooks: {
+        beforeChange: [
+          ({ data }: { data?: any }) => {
+            if (data?.status === 'published' && !data.publishedDate) {
+              return new Date().toISOString()
+            }
+            return data?.publishedDate
+          },
+        ],
+      },
+    },
+  ],
   timestamps: true,
 }
