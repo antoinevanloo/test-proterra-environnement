@@ -60,26 +60,44 @@ npm install
 ```
 
 ### 2. Configuration
-Créer un fichier `.env` à la racine :
-```env
-# MongoDB
-MONGODB_URI=mongodb://localhost:27017/proterra
-
-# Payload CMS
-PAYLOAD_SECRET=votre-clé-secrète-minimum-32-caractères
-PAYLOAD_PORT=3001
-
-# Next.js
-NEXT_PUBLIC_SERVER_URL=http://localhost:3000
-```
-
-### 3. Démarrer MongoDB
+Créer un fichier `.env` à partir de l'exemple :
 ```bash
-# Si MongoDB local
-mongod
-
-# Ou utiliser MongoDB Atlas (cloud)
+cp .env.example .env
 ```
+
+Puis générer une clé secrète sécurisée :
+```bash
+openssl rand -base64 32
+```
+
+Éditer `.env` et remplacer `PAYLOAD_SECRET` avec la clé générée :
+```env
+# MongoDB - Credentials (utilisés par docker-compose.yml)
+MONGO_USERNAME=proterra_admin
+MONGO_PASSWORD=ProterraSecure2024!
+MONGO_DATABASE=proterra
+
+# MongoDB - URI de connexion
+MONGODB_URI=mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@localhost:27017/${MONGO_DATABASE}?authSource=admin
+
+# Payload CMS - CHANGEZ CETTE CLÉ !
+PAYLOAD_SECRET=votre-clé-générée-ici
+
+# Autres variables...
+```
+
+**⚠️ SÉCURITÉ** : Le fichier `.env` contient vos credentials et n'est jamais commité (`.gitignore`).
+
+### 3. Démarrer MongoDB avec Docker Compose
+```bash
+# Démarrer MongoDB en arrière-plan
+docker-compose up -d
+
+# Vérifier que MongoDB tourne
+docker-compose ps
+```
+
+Docker Compose lit automatiquement les variables depuis `.env` - **aucun credential n'est hardcodé** dans `docker-compose.yml`.
 
 ### 4. Démarrer les serveurs
 

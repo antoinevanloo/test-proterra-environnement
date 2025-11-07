@@ -6,9 +6,9 @@ services:
     ports:
       - '27017:27017'
     environment:
-      MONGO_INITDB_ROOT_USERNAME: proterra_admin
-      MONGO_INITDB_ROOT_PASSWORD: ProterraSecure2024!
-      MONGO_INITDB_DATABASE: proterra
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_DATABASE}
     volumes:
       - proterra-data:/data/db
     networks:

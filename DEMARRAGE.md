@@ -13,6 +13,10 @@ docker rm proterra-mongodb 2>/dev/null
 cp .env.example .env
 ```
 
+**IMPORTANT** : Le fichier `.env` contient maintenant :
+- Les credentials MongoDB (utilisés par Docker Compose)
+- La clé secrète Payload (à générer)
+
 ### 3️⃣ Générer une clé secrète sécurisée
 ```bash
 # Générer une clé aléatoire
@@ -103,17 +107,31 @@ docker-compose ps
 
 ## 🔐 Informations de connexion MongoDB
 
-- **Host** : localhost
-- **Port** : 27017
-- **Database** : proterra
-- **Username** : proterra_admin
-- **Password** : ProterraSecure2024!
-- **Auth Database** : admin
+Les credentials MongoDB sont définis dans votre fichier `.env` :
+
+```env
+MONGO_USERNAME=proterra_admin
+MONGO_PASSWORD=ProterraSecure2024!
+MONGO_DATABASE=proterra
+```
+
+**⚠️ SÉCURITÉ** :
+- Le fichier `.env` n'est **jamais commité** (il est dans `.gitignore`)
+- Docker Compose lit les variables depuis `.env` automatiquement
+- Vous pouvez changer ces valeurs dans `.env` avant de démarrer Docker
 
 **URI complète** :
 ```
 mongodb://proterra_admin:ProterraSecure2024!@localhost:27017/proterra?authSource=admin
 ```
+
+**Connexion par défaut** :
+- **Host** : localhost
+- **Port** : 27017
+- **Database** : proterra
+- **Username** : proterra_admin
+- **Password** : ProterraSecure2024! (changeable dans `.env`)
+- **Auth Database** : admin
 
 ---
 
