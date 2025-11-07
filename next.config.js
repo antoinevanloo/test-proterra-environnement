@@ -4,11 +4,6 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
 
-  // Payload CMS configuration
-  experimental: {
-    reactCompiler: false,
-  },
-
   // Image optimization
   images: {
     formats: ['image/avif', 'image/webp'],

@@ -4,10 +4,10 @@
   "description": "Site web professionnel Proterra Environnement avec Next.js + Payload CMS",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_OPTIONS='--no-deprecation' next dev",
+    "dev": "cross-env NODE_OPTIONS='--no-deprecation' next dev -p 3000",
     "dev:payload": "cross-env NODE_OPTIONS='--no-deprecation' ts-node server.ts",
     "build": "cross-env NODE_OPTIONS='--no-deprecation' payload migrate && next build",
-    "start": "cross-env NODE_OPTIONS='--no-deprecation' next start",
+    "start": "cross-env NODE_OPTIONS='--no-deprecation' next start -p 3000",
     "start:payload": "cross-env NODE_OPTIONS='--no-deprecation' ts-node server.ts",
     "lint": "next lint",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css,md}\"",

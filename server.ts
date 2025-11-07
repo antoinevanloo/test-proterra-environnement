@@ -16,12 +16,12 @@ const start = async () => {
     secret: process.env.PAYLOAD_SECRET || 'YOUR-SECRET-KEY',
     express: app,
     onInit: () => {
-      payload.logger.info(`Payload Admin URL: http://localhost:${PORT}${payload.getAdminURL()}`)
+      payload.logger.info(`Payload Admin URL: http://localhost:${PORT}/admin`)
     },
   })
 
   app.listen(PORT, () => {
-    console.log(`Payload CMS Admin running on http://localhost:${PORT}/admin`)
+    console.log(`✅ Payload CMS Admin running on http://localhost:${PORT}/admin`)
   })
 }
 

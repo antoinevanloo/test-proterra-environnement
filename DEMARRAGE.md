@@ -59,17 +59,27 @@ npm install
 
 ### 6️⃣ Lancer les 2 serveurs
 
-**Terminal 1 - Site Next.js** :
+⚠️ **IMPORTANT - ORDRE DE DÉMARRAGE** :
+Il faut **toujours démarrer Payload Admin EN PREMIER** pour qu'il réserve le port 3001.
+
+**Terminal 1 - Payload Admin** (démarrer EN PREMIER) :
+```bash
+npm run dev:payload
+```
+✅ Admin accessible sur **http://localhost:3001/admin**
+
+Attendez que Payload soit complètement démarré (message "webpack compiled successfully"), puis :
+
+**Terminal 2 - Site Next.js** (démarrer EN SECOND) :
 ```bash
 npm run dev
 ```
 ✅ Site accessible sur **http://localhost:3000**
 
-**Terminal 2 - Payload Admin** (nouveau terminal) :
-```bash
-npm run dev:payload
-```
-✅ Admin accessible sur **http://localhost:3001/admin**
+**Pourquoi cet ordre ?**
+- Next.js utilise le port 3000 (forcé via `-p 3000`)
+- Payload Admin utilise le port 3001 (défini dans PAYLOAD_PORT)
+- Si vous démarrez Next.js en premier et que le port 3000 est occupé, Next.js cherchera 3001 et créera un conflit
 
 ---
 
