@@ -1,3 +1,3 @@
-import config from './src/payload/payload.config.ts'
+import config from './src/payload/payload.config'
 
 export default config

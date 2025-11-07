@@ -7,7 +7,6 @@ dotenv.config()
 const app = express()
 const PORT = process.env.PAYLOAD_PORT || 3001
 
-// Initialize Payload
 const start = async () => {
   await payload.init({
     secret: process.env.PAYLOAD_SECRET || 'YOUR-SECRET-KEY',

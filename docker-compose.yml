@@ -1,8 +1,6 @@
-version: '3.8'
-
 services:
   mongodb:
-    image: mongo:7-alpine
+    image: mongo:7.0
     container_name: proterra-mongodb
     restart: unless-stopped
     ports:
