@@ -49,7 +49,12 @@ export function Header() {
           <div className="flex h-20 items-center justify-between">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3 transition-transform hover:scale-105">
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-proterra-lime-500 to-proterra-blue-500">
+              <div
+                className={cn(
+                  "flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-proterra-lime-500 to-proterra-blue-500 transition-shadow",
+                  isScrolled ? "shadow-md ring-1 ring-gray-200" : "shadow-lg"
+                )}
+              >
                 <span className="text-2xl font-bold text-white">P</span>
               </div>
               <div className="flex flex-col">
