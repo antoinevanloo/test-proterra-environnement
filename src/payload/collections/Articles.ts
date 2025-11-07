@@ -1,4 +1,4 @@
-import type { CollectionConfig } from 'payload'
+import { CollectionConfig } from 'payload/types'
 
 export const Articles: CollectionConfig = {
   slug: 'articles',
@@ -36,7 +36,7 @@ export const Articles: CollectionConfig = {
       },
       hooks: {
         beforeValidate: [
-          ({ value, data }) => {
+          ({ value, data }: { value?: string; data?: any }) => {
             if (!value && data?.title) {
               return data.title
                 .toLowerCase()
